@@ -1,10 +1,21 @@
 {
   "name": "eatery-plan",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Create, convert, edit, validate and render Eatery Plan floor plans for restaurants, cafes and bars, including turning a floor plan image or sketch into a validated plan.",
-  "author": { "name": "Hasan Cagri Gungor", "url": "https://github.com/hasancagrigungor" },
+  "author": {
+    "name": "Hasan Cagri Gungor",
+    "url": "https://github.com/hasancagrigungor"
+  },
   "homepage": "https://github.com/hasancagrigungor/eatery-plan",
   "repository": "https://github.com/hasancagrigungor/eatery-plan-claude",
   "license": "MIT",
-  "keywords": ["floor-plan", "restaurant", "cafe", "bar", "pos", "json-schema"]
+  "keywords": [
+    "floor-plan",
+    "restaurant",
+    "cafe",
+    "bar",
+    "pos",
+    "json-schema"
+  ],
+  "displayName": "Eatery Plan"
 }

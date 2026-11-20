@@ -16,18 +16,15 @@ Use this skill when the user wants to:
 - **edit** a plan ("move A3 next to the window", "add 4 two-person tables to the terrace")
 - **validate**, **render/preview**, or **upgrade** (legacy CafePlan) a plan, or check live table state / sensor data
 
-## Paths
-
-`SKILL_DIR` below is this skill's folder: `${CLAUDE_SKILL_DIR}` in Claude Code; in other environments, the
-folder that contains this SKILL.md (scripts are at `scripts/` relative to it).
-
 ## Setup (once per environment)
 
 1. Check the CLI: `eateryplan --help`. If it is missing, tell the user it is needed and, with their OK, install it:
-   `pip install "git+https://github.com/hasancagrigungor/eatery-plan@v1.0.0#subdirectory=python"` (Python 3.10+).
+   `pip install "git+https://github.com/hasancagrigungor/eatery-plan@v1.0.1#subdirectory=python"` (Python 3.10+).
 2. The schemas ship with the package. Print their folder with
    `python3 -c "import eateryplan, pathlib; print(pathlib.Path(eateryplan.__file__).parent / 'schemas')"`.
-3. Rendering previews needs Node.js 18+ (`node --version`). It is optional.
+3. Previews are optional and need Node.js 18+ and the reference renderer. With the user's OK, fetch the pinned
+   release once: `git clone --depth 1 --branch v1.0.1 https://github.com/hasancagrigungor/eatery-plan`
+   and use `node <clone>/js/bin/render.mjs`. If the user already has the repository, use theirs.
 
 ## Hard rules
 
@@ -54,8 +51,9 @@ Do the uncertain part (reading the drawing) in pixels and let the importer do th
    `eateryplan import detection.json plan.json --image <image> --name "<venue>" --tool "eatery-plan skill"`
    Add `--json` to get machine-readable issues. If it fails, fix `detection.json` and run it again
    (at most 3 attempts; then explain what is still wrong).
-5. Preview: `node SKILL_DIR/scripts/render.mjs plan.json plan.svg`. Compare the preview with the image. If walls,
-   doors or tables are clearly misplaced, correct `detection.json` once and re-import.
+5. If the renderer is available, preview: `node <clone>/js/bin/render.mjs plan.json plan.svg`. Compare the
+   preview with the image. If walls, doors or tables are clearly misplaced, correct `detection.json` once and
+   re-import.
 6. Report to the user: rooms, tables and seats, doors and windows, whether a scale was found, the importer's
    `provenance.notes`, and every object with `needsReview`. Ask them to confirm or correct those.
 
@@ -71,7 +69,8 @@ Edit the plan JSON directly, then validate.
 - Every edit: new ids must be unique (`table_<n>`, `zone_<name>`…), `floorId` must match the floor, `revision`
   +1, `updatedAt` = now (RFC 3339, UTC `Z`).
 - Openings belong to a wall: `wallId`, `position` (0–1 centre along the wall), `width`.
-- After editing: `eateryplan validate plan.json`, fix all errors, mention warnings, render a preview.
+- After editing: `eateryplan validate plan.json`, fix all errors, mention warnings, and render a preview if the
+  renderer is available.
 
 | Item | Typical size |
 |---|---|
@@ -99,7 +98,7 @@ should be shown to the user.
 ## D. Render
 
 ```bash
-node SKILL_DIR/scripts/render.mjs plan.json plan.html [--state table-state.json] [--telemetry telemetry.json]
+node <clone>/js/bin/render.mjs plan.json plan.html [--state table-state.json] [--telemetry telemetry.json]
 ```
 
 `.svg` or `.html` output. With `--state`, tables are coloured by live status. For apps, point developers to the
