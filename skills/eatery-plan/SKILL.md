@@ -24,7 +24,7 @@ folder that contains this SKILL.md (scripts are at `scripts/` relative to it).
 ## Setup (once per environment)
 
 1. Check the CLI: `eateryplan --help`. If it is missing, tell the user it is needed and, with their OK, install it:
-   `pip install "git+https://github.com/hasancagrigungor/eatery-plan#subdirectory=python"` (Python 3.10+).
+   `pip install "git+https://github.com/hasancagrigungor/eatery-plan@v1.0.0#subdirectory=python"` (Python 3.10+).
 2. The schemas ship with the package. Print their folder with
    `python3 -c "import eateryplan, pathlib; print(pathlib.Path(eateryplan.__file__).parent / 'schemas')"`.
 3. Rendering previews needs Node.js 18+ (`node --version`). It is optional.
