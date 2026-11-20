@@ -35,6 +35,18 @@ and upload it in the Skills settings. The archive contains the `eatery-plan/` sk
 - "Move table A3 next to the window and add two bar stools to the counter."
 - "Validate plan.json and show me a preview."
 
+## Privacy
+
+This plugin collects nothing and sends nothing anywhere. It contains instructions only, with no bundled code,
+MCP servers or hooks. The files you work on stay where they are; Claude reads and writes them with the tools you
+allow. With your permission, Claude runs two kinds of commands:
+
+- the open-source `eateryplan` CLI, installed from https://github.com/hasancagrigungor/eatery-plan at a pinned
+  release; it runs locally and makes no network requests
+- optionally, the reference renderer from the same repository (Node.js), also local
+
+No account, API key or telemetry is involved.
+
 ## Türkçe
 
 Bu eklenti, Claude'un [Eatery Plan](https://github.com/hasancagrigungor/eatery-plan) dosyalarını oluşturmasını,
