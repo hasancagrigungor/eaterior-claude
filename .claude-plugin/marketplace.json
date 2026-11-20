@@ -1,0 +1,12 @@
+{
+  "name": "eatery-plan-marketplace",
+  "owner": { "name": "Hasan Cagri Gungor", "url": "https://github.com/hasancagrigungor" },
+  "metadata": { "description": "Eatery Plan tools for Claude" },
+  "plugins": [
+    {
+      "name": "eatery-plan",
+      "source": "./",
+      "description": "Create, convert, edit, validate and render Eatery Plan floor plans for restaurants, cafes and bars."
+    }
+  ]
+}
