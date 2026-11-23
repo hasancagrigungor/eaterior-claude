@@ -1,6 +1,6 @@
 {
   "name": "eatery-plan",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Create, convert, edit, validate and render Eatery Plan floor plans for restaurants, cafes and bars, including turning a floor plan image or sketch into a validated plan.",
   "author": {
     "name": "Hasan Cagri Gungor",

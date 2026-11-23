@@ -19,11 +19,11 @@ Use this skill when the user wants to:
 ## Setup (once per environment)
 
 1. Check the CLI: `eateryplan --help`. If it is missing, tell the user it is needed and, with their OK, install it:
-   `pip install "git+https://github.com/hasancagrigungor/eatery-plan@v1.5.0#subdirectory=python"` (Python 3.10+).
+   `pip install "git+https://github.com/hasancagrigungor/eatery-plan@v1.6.0#subdirectory=python"` (Python 3.10+).
 2. The schemas ship with the package. Print their folder with
    `python3 -c "import eateryplan, pathlib; print(pathlib.Path(eateryplan.__file__).parent / 'schemas')"`.
 3. Previews are optional and need Node.js 18+ and the reference renderer. With the user's OK, fetch the pinned
-   release once: `git clone --depth 1 --branch v1.5.0 https://github.com/hasancagrigungor/eatery-plan`
+   release once: `git clone --depth 1 --branch v1.6.0 https://github.com/hasancagrigungor/eatery-plan`
    and use `node <clone>/js/bin/render.mjs`. If the user already has the repository, use theirs.
 
 ## Hard rules
@@ -78,8 +78,9 @@ Edit the plan JSON directly, then validate.
   have `heightMeters`. Outdoor and climate kinds include `pergola`, `palm_tree`, `parasol`, `tree`,
   `patio_heater`, `wall_heater`, `ceiling_cassette` and `ventilation_duct`. Pergolas take `appearance.roof`
   (`slatted`, `louvered`, `glass`, `fabric`, `solid`); glass balconies are walls of kind `glass_folding` or
-  `glass_sliding`, with or without a pergola. Tables, sofas, armchairs and parasols take
-  `appearance.style`; seat kinds include `bistro`, `cafe`, `tub`, `lounge`, `pouf`, `stool_backrest`. Give real sizes
+  `glass_sliding`, with or without a pergola. Tables, sofas, armchairs, parasols and rugs take
+  `appearance.style` (rugs: persian, kilim, moroccan, striped, geometric, shag, jute, floral, bordered, abstract,
+  chevron, braided); seat kinds include `bistro`, `cafe`, `tub`, `lounge`, `pouf`, `stool_backrest`. Give real sizes
   (set `realWorldScale`) so furniture is drawn to scale. Describe what
   things are; never put drawing instructions in the plan.
 
