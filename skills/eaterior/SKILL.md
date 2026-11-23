@@ -1,34 +1,36 @@
 ---
-name: eatery-plan
-description: Create, convert, edit, validate and render Eatery Plan floor plans (restaurant, cafe and bar layouts as JSON), including turning a floor plan image or sketch into a validated plan.
+name: eaterior
+description: Create, convert, edit, validate and render Eaterior floor plans (restaurant, cafe and bar layouts as JSON), including turning a floor plan image or sketch into a validated plan.
 ---
 
-# Eatery Plan
+# Eaterior
 
-Eatery Plan is an open JSON format for the physical layout of restaurants, cafes and bars: floors, zones, walls,
+Eaterior is an open JSON format for the physical layout of restaurants, cafes and bars: floors, zones, walls,
 doors and windows, tables, furniture, HVAC equipment and sensors. Specification and schemas:
-https://github.com/hasancagrigungor/eatery-plan
+https://github.com/hasancagrigungor/eaterior
 
 Use this skill when the user wants to:
 
-- turn a floor plan **image, photo, scan or sketch** into an Eatery Plan file
+- turn a floor plan **image, photo, scan or sketch** into an Eaterior file
 - **create** a plan from a description ("12 tables, a bar on the left, a terrace")
 - **edit** a plan ("move A3 next to the window", "add 4 two-person tables to the terrace")
 - **validate**, **render/preview**, or **upgrade** (legacy CafePlan) a plan, or check live table state / sensor data
 
 ## Setup (once per environment)
 
-1. Check the CLI: `eateryplan --help`. If it is missing, tell the user it is needed and, with their OK, install it:
-   `pip install "git+https://github.com/hasancagrigungor/eatery-plan@v1.7.0#subdirectory=python"` (Python 3.10+).
+1. Check the CLI: `eaterior --help`. If it is missing, tell the user it is needed and, with their OK, install it:
+   `pip install "git+https://github.com/hasancagrigungor/eaterior@v1.8.0#subdirectory=python"` (Python 3.10+).
 2. The schemas ship with the package. Print their folder with
-   `python3 -c "import eateryplan, pathlib; print(pathlib.Path(eateryplan.__file__).parent / 'schemas')"`.
+   `python3 -c "import eaterior, pathlib; print(pathlib.Path(eaterior.__file__).parent / 'schemas')"`.
 3. Previews are optional and need Node.js 18+ and the reference renderer. With the user's OK, fetch the pinned
-   release once: `git clone --depth 1 --branch v1.7.0 https://github.com/hasancagrigungor/eatery-plan`
+   release once: `git clone --depth 1 --branch v1.8.0 https://github.com/hasancagrigungor/eaterior`
    and use `node <clone>/js/bin/render.mjs`. If the user already has the repository, use theirs.
 
 ## Hard rules
 
-- Never save or hand over a plan that fails `eateryplan validate`. Fix it first.
+- Never save or hand over a plan that fails `eaterior validate`. Fix it first.
+- Files with the old `eateryplan` format id (the project was called Eatery Plan) are still valid; write new
+  files as `eaterior` and offer `eaterior migrate` for old ones.
 - Only describe what exists. Do not add tables, doors, devices or rooms that are not in the image or the request.
 - Never invent the real-world scale. Use it only from a scale bar, a written dimension, or the user.
 - Never invent device capacities, sensor readings or POS ids.
@@ -50,7 +52,7 @@ Do the uncertain part (reading the drawing) in pixels and let the importer do th
 3. Look at the image carefully and write `detection.json`, in **image pixel coordinates** (origin top-left).
    Every field is required; use `null` when unknown.
 4. Convert and validate:
-   `eateryplan import detection.json plan.json --image <image> --name "<venue>" --tool "eatery-plan skill"`
+   `eaterior import detection.json plan.json --image <image> --name "<venue>" --tool "eaterior skill"`
    Add `--json` to get machine-readable issues. If it fails, fix `detection.json` and run it again
    (at most 3 attempts; then explain what is still wrong).
 5. If the renderer is available, preview: `node <clone>/js/bin/render.mjs plan.json plan.svg`. Compare the
@@ -63,7 +65,7 @@ Do the uncertain part (reading the drawing) in pixels and let the importer do th
 
 Edit the plan JSON directly, then validate.
 
-- New plan: start from https://github.com/hasancagrigungor/eatery-plan/blob/main/examples/plan.json as a
+- New plan: start from https://github.com/hasancagrigungor/eaterior/blob/main/examples/plan.json as a
   structural template. Keep `coordinateSpace` in the real aspect ratio (e.g. a 15 m × 9 m room → `1000 × 600`).
   Set `realWorldScale.metersPerUnit` only when the user gave real dimensions.
 - Sizes: when `metersPerUnit` is known, convert from metres using the table below. When it is not, keep sizes
@@ -71,7 +73,7 @@ Edit the plan JSON directly, then validate.
 - Every edit: new ids must be unique (`table_<n>`, `zone_<name>`…), `floorId` must match the floor, `revision`
   +1, `updatedAt` = now (RFC 3339, UTC `Z`).
 - Openings belong to a wall: `wallId`, `position` (0–1 centre along the wall), `width`.
-- After editing: `eateryplan validate plan.json`, fix all errors, mention warnings, and render a preview if the
+- After editing: `eaterior validate plan.json`, fix all errors, mention warnings, and render a preview if the
   renderer is available.
 
 - Looks: give zones an `appearance.floor` (`wood_planks`, `wood_herringbone`, `tile_checker`, `tile_square`, `marble`,
@@ -100,11 +102,11 @@ Edit the plan JSON directly, then validate.
 ## C. Validate, upgrade, live data
 
 ```bash
-eateryplan validate plan.json [--json]
-eateryplan migrate old-cafeplan.json plan.json
-eateryplan check-state plan.json table-state.json
-eateryplan check-telemetry plan.json telemetry.json
-eateryplan check-objects plan.json objects.json
+eaterior validate plan.json [--json]
+eaterior migrate old-cafeplan.json plan.json
+eaterior check-state plan.json table-state.json
+eaterior check-telemetry plan.json telemetry.json
+eaterior check-objects plan.json objects.json
 ```
 
 Live component state (active/passive, `open` 0–1 for pergolas, glass walls, doors and windows, device `power`)

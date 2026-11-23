@@ -1,13 +1,13 @@
 {
-  "name": "eatery-plan",
-  "version": "1.7.0",
-  "description": "Create, convert, edit, validate and render Eatery Plan floor plans for restaurants, cafes and bars, including turning a floor plan image or sketch into a validated plan.",
+  "name": "eaterior",
+  "version": "1.8.0",
+  "description": "Create, convert, edit, validate and render Eaterior floor plans for restaurants, cafes and bars, including turning a floor plan image or sketch into a validated plan.",
   "author": {
     "name": "Hasan Cagri Gungor",
     "url": "https://github.com/hasancagrigungor"
   },
-  "homepage": "https://github.com/hasancagrigungor/eatery-plan",
-  "repository": "https://github.com/hasancagrigungor/eatery-plan-claude",
+  "homepage": "https://github.com/hasancagrigungor/eaterior",
+  "repository": "https://github.com/hasancagrigungor/eaterior-claude",
   "license": "MIT",
   "keywords": [
     "floor-plan",
