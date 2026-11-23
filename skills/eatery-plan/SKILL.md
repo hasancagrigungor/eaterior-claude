@@ -19,11 +19,11 @@ Use this skill when the user wants to:
 ## Setup (once per environment)
 
 1. Check the CLI: `eateryplan --help`. If it is missing, tell the user it is needed and, with their OK, install it:
-   `pip install "git+https://github.com/hasancagrigungor/eatery-plan@v1.0.1#subdirectory=python"` (Python 3.10+).
+   `pip install "git+https://github.com/hasancagrigungor/eatery-plan@v1.1.0#subdirectory=python"` (Python 3.10+).
 2. The schemas ship with the package. Print their folder with
    `python3 -c "import eateryplan, pathlib; print(pathlib.Path(eateryplan.__file__).parent / 'schemas')"`.
 3. Previews are optional and need Node.js 18+ and the reference renderer. With the user's OK, fetch the pinned
-   release once: `git clone --depth 1 --branch v1.0.1 https://github.com/hasancagrigungor/eatery-plan`
+   release once: `git clone --depth 1 --branch v1.1.0 https://github.com/hasancagrigungor/eatery-plan`
    and use `node <clone>/js/bin/render.mjs`. If the user already has the repository, use theirs.
 
 ## Hard rules
@@ -72,6 +72,11 @@ Edit the plan JSON directly, then validate.
 - After editing: `eateryplan validate plan.json`, fix all errors, mention warnings, and render a preview if the
   renderer is available.
 
+- Looks: give zones an `appearance.floor` (`wood_planks`, `wood_herringbone`, `tile_checker`, `tile_square`, `marble`,
+  `terrazzo`, `concrete`, `carpet`, `terrace_deck`, `grass`, `stone`) and colours; tables a `material`, optional
+  `tablecloth` and `tableSetting`, and a `chairStyle` (`chair`, `armchair`, `stool`, `bench`, `booth`). Describe what
+  things are; never put drawing instructions in the plan.
+
 | Item | Typical size |
 |---|---|
 | 2-person table | 0.7 × 0.7 m |
@@ -101,5 +106,6 @@ should be shown to the user.
 node <clone>/js/bin/render.mjs plan.json plan.html [--state table-state.json] [--telemetry telemetry.json]
 ```
 
-`.svg` or `.html` output. With `--state`, tables are coloured by live status. For apps, point developers to the
+`.svg` or `.html` output. Add `--style illustrated` for the colourful top-down illustration (floor textures, furniture
+symbols, shadows) or leave it out for the plain plan. With `--state`, tables are coloured by live status. For apps, point developers to the
 renderer and React Native example in the main repository.
