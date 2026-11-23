@@ -19,11 +19,11 @@ Use this skill when the user wants to:
 ## Setup (once per environment)
 
 1. Check the CLI: `eateryplan --help`. If it is missing, tell the user it is needed and, with their OK, install it:
-   `pip install "git+https://github.com/hasancagrigungor/eatery-plan@v1.1.1#subdirectory=python"` (Python 3.10+).
+   `pip install "git+https://github.com/hasancagrigungor/eatery-plan@v1.2.0#subdirectory=python"` (Python 3.10+).
 2. The schemas ship with the package. Print their folder with
    `python3 -c "import eateryplan, pathlib; print(pathlib.Path(eateryplan.__file__).parent / 'schemas')"`.
 3. Previews are optional and need Node.js 18+ and the reference renderer. With the user's OK, fetch the pinned
-   release once: `git clone --depth 1 --branch v1.1.1 https://github.com/hasancagrigungor/eatery-plan`
+   release once: `git clone --depth 1 --branch v1.2.0 https://github.com/hasancagrigungor/eatery-plan`
    and use `node <clone>/js/bin/render.mjs`. If the user already has the repository, use theirs.
 
 ## Hard rules
@@ -75,7 +75,8 @@ Edit the plan JSON directly, then validate.
 - Looks: give zones an `appearance.floor` (`wood_planks`, `wood_herringbone`, `tile_checker`, `tile_square`, `marble`,
   `terrazzo`, `concrete`, `carpet`, `terrace_deck`, `grass`, `stone`) and colours; tables a `material`, optional
   `tablecloth` and `tableSetting`, and a `chairStyle` (`chair`, `armchair`, `stool`, `bench`, `booth`). Walls may
-  have `heightMeters`. Describe what
+  have `heightMeters`. Outdoor and climate kinds include `pergola`, `palm_tree`, `parasol`, `tree`,
+  `patio_heater`, `wall_heater`, `ceiling_cassette` and `ventilation_duct`. Describe what
   things are; never put drawing instructions in the plan.
 
 | Item | Typical size |
