@@ -19,11 +19,11 @@ Use this skill when the user wants to:
 ## Setup (once per environment)
 
 1. Check the CLI: `eateryplan --help`. If it is missing, tell the user it is needed and, with their OK, install it:
-   `pip install "git+https://github.com/hasancagrigungor/eatery-plan@v1.3.0#subdirectory=python"` (Python 3.10+).
+   `pip install "git+https://github.com/hasancagrigungor/eatery-plan@v1.4.0#subdirectory=python"` (Python 3.10+).
 2. The schemas ship with the package. Print their folder with
    `python3 -c "import eateryplan, pathlib; print(pathlib.Path(eateryplan.__file__).parent / 'schemas')"`.
 3. Previews are optional and need Node.js 18+ and the reference renderer. With the user's OK, fetch the pinned
-   release once: `git clone --depth 1 --branch v1.3.0 https://github.com/hasancagrigungor/eatery-plan`
+   release once: `git clone --depth 1 --branch v1.4.0 https://github.com/hasancagrigungor/eatery-plan`
    and use `node <clone>/js/bin/render.mjs`. If the user already has the repository, use theirs.
 
 ## Hard rules
@@ -99,9 +99,11 @@ eateryplan validate plan.json [--json]
 eateryplan migrate old-cafeplan.json plan.json
 eateryplan check-state plan.json table-state.json
 eateryplan check-telemetry plan.json telemetry.json
+eateryplan check-objects plan.json objects.json
 ```
 
-Errors block saving. Warnings (overlapping tables, a table blocking a door, low confidence, over capacity…)
+Live component state (active/passive, `open` 0–1 for pergolas, glass walls, doors and windows, device `power`)
+goes in an object-state document, never in the plan; the plan only holds the default `active`. Errors block saving. Warnings (overlapping tables, a table blocking a door, low confidence, over capacity…)
 should be shown to the user.
 
 ## D. Render

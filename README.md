@@ -18,7 +18,7 @@ With it, Claude can:
 ```
 
 The skill uses the `eateryplan` command-line tool. Claude offers to install it the first time
-(`pip install "git+https://github.com/hasancagrigungor/eatery-plan@v1.3.0#subdirectory=python"`); previews use the
+(`pip install "git+https://github.com/hasancagrigungor/eatery-plan@v1.4.0#subdirectory=python"`); previews use the
 renderer from the main repository (Node.js 18+).
 
 Update later with `/plugin update eatery-plan@eatery-plan-marketplace`.
